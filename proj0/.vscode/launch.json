@@ -1,0 +1,155 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-In<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "In",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-NBody<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "NBody",
+            "args": "157788000.0 25000.0 data/planets.txt",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-StdAudio<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "StdAudio",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-StdDraw<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "StdDraw",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-StdOut<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "StdOut",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestCalcDistance<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "TestCalcDistance",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestCalcForceExertedBy<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "TestCalcForceExertedBy",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestCalcForceExertedByXY<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "TestCalcForceExertedByXY",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestCalcNetForceExertedByXY<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "TestCalcNetForceExertedByXY",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestPlanetConstructor<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "TestPlanetConstructor",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestReadPlanets<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "TestReadPlanets",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestReadRadius<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "TestReadRadius",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestUpdate<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "TestUpdate",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-BasicInDemo<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "examples.BasicInDemo",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-In<proj0_18a7d7c9>(1)",
+            "request": "launch",
+            "mainClass": "examples.In",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-InDemo<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "examples.InDemo",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-StdDraw<proj0_18a7d7c9>(1)",
+            "request": "launch",
+            "mainClass": "examples.StdDraw",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-StdDrawDemo<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "examples.StdDrawDemo",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-StdOut<proj0_18a7d7c9>(1)",
+            "request": "launch",
+            "mainClass": "examples.StdOut",
+            "projectName": "proj0_18a7d7c9"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-StdRandom<proj0_18a7d7c9>",
+            "request": "launch",
+            "mainClass": "examples.StdRandom",
+            "projectName": "proj0_18a7d7c9"
+        }
+    ]
+}
