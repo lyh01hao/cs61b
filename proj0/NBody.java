@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
 
 public class NBody {
     public static double readRadius(String fileName){
         In in = new In(fileName);
-        double number = in.readDouble();
+        in.readLine();
         return in.readDouble();
     }
     // public static Planet[] readPlanets(String fileName){
@@ -83,6 +82,7 @@ public class NBody {
             StdDraw.pause(10);
           }
           time+=dt;
+          break;
         }
         StdOut.printf("%d\n", planets.length);
         StdOut.printf("%.2e\n", R);
@@ -93,13 +93,13 @@ public class NBody {
 }
         }
 
-        public static void drawBackground(double R){
+        private static void drawBackground(double R){
         StdDraw.setScale(-R,R);
         StdDraw.clear();
         StdDraw.picture(0,0,"images/starfield.jpg");        
       }
 
-      public static void drawPlanets(Planet[] p){
+      private static void drawPlanets(Planet[] p){
         for(Planet pp : p){
           pp.draw();
         }
