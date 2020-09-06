@@ -1,48 +1,48 @@
 public class LinkedListDeque<T> {
-    List sentinel;
-    int size;
-    public class List{
-        T value;
-        List pre;
-        List post;
+    private List sentinel;
+    private int size;
+    private class List{
+        private T value;
+        private List pre;
+        private List post;
 
-        List(T value, List pre, List post){
+        List(T value, List pre, List post) {
             this.value = value;
             this.pre = pre;
             this.post = post;
         }
     }
 
-    public LinkedListDeque(){
+    public LinkedListDeque() {
         sentinel = new List(null,null,null);
         sentinel.pre = sentinel;
         sentinel.post = sentinel;
         size = 0;
     }
 
-    public void addFirst(T item){
+    public void addFirst(T item) {
         List newList = new List(item,sentinel,sentinel.post);
         sentinel.post = newList;
         newList.post.pre = newList;
-        size ++;
+        size++;
     }
-    public void addLast(T item){
+    public void addLast(T item) {
         List newList = new List(item,sentinel.pre,sentinel);
         sentinel.pre = newList;
         newList.pre.post = newList;
-        size ++;
+        size++;
     }
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         if (size == 0){
             return true;
         }else{
             return false;
         }
     }
-    public int size(){
+    public int size() {
         return size;
     }
-    public void printDeque(){
+    public void printDeque() {
         List l = sentinel;
         for(int i = 0; i < size ; i++){
             l = l.post;
@@ -50,7 +50,7 @@ public class LinkedListDeque<T> {
         }
         System.out.println();
     }
-    public T removeFirst(){
+    public T removeFirst() {
         if(size == 0){
             return null;
         }else{
@@ -61,7 +61,7 @@ public class LinkedListDeque<T> {
             return target.value;
         }
     }
-    public T removeLast(){
+    public T removeLast() {
         if(size == 0){
             return null;
         }else{
@@ -73,20 +73,20 @@ public class LinkedListDeque<T> {
         }
 
     }
-    public T get(int index){
+    public T get(int index) {
         List l = sentinel;
         for(int i = 0; i <= index; i++){
             l = l.post;
         }
         return l.value;
     }
-    public T getRecursive(int index){
+    public T getRecursive(int index) {
         return getRecursiveHelper(sentinel,index).value;
     }
     private List getRecursiveHelper(List start, int index){
         if(index == 0){
             return start.post;
         }
-         return getRecursiveHelper(start.post ,index - 1);
+         return getRecursiveHelper(start.post , index - 1);
     }
 }

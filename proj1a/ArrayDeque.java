@@ -1,78 +1,101 @@
+/**
+ * created by Yihao Lin
+ * @param <T>
+ */
 public class ArrayDeque<T> {
-    T[] items;
-    int size;
+    private T[] items;
+    private int size;
+    private int nextFirst;
+    private int nextLast;
+
+    private int initSize = 4;
+
     public ArrayDeque(){
-        items = (T[]) new Object[100];
+        items = (T[]) new Object[8];
+        nextFirst = 4;
+        nextLast = 5;
         size = 0;
     }
 
     public void addFirst(T item){
-        if(items.length == size){
-            T[] temp = (T[]) new Object[size * 2];
-            System.arraycopy(items,0,temp,1,size);
-            items = temp;
-        }else{
-            T[] temp = (T[]) new Object[size];
-            System.arraycopy(items,0,temp,1,size);
-            items = temp;
+        if (size == items.length){
+            resize(items.length * 2);
         }
-        items[0] = item;
-        size ++;
+        items[nextFirst] = item;
+        nextFirst = ((nextFirst - 1) + items.length) % items.length;
+        size++;
     }
-    private void resize(int capacity){
-        T[] temp = (T[]) new Object[capacity];
-        System.arraycopy(items,0,temp,0,size);
-        items = temp;
+    private void resize(int capacity) {
+        T[] newItems = (T[]) new Object[capacity];
+        int start = newItems.length / 2 - size / 2;
+        int newIndex = start + 1;
+        for (int i = 0; i < size; i++) {
+            newItems[newIndex] = items[(nextFirst + 1 + i) % items.length];
+            newIndex++;
+        }
+        items = newItems;
+        nextFirst = start;
+        nextLast = newIndex;
     }
     public void addLast(T item){
-        if(items.length == size){
-            resize(size * 2);
+        if (size == items.length){
+            resize(items.length * 2);
         }
-        items[size] = item;
-        size ++;
+        items[nextLast] = item;
+        nextLast = (nextLast + 1) % items.length;
+        size++;
     }
     public boolean isEmpty(){
-        if(size == 0){
-            return true;
-        }else{
-            return false;
-        }
+        return size == 0;
     }
     public int size(){
         return size;
     }
     public void printDeque(){
-        for(int i = 0 ;i<size;i++){
-            System.out.print(items[i]+" ");
+        int curFirst = (nextFirst + 1) % items.length;
+        for(int i = 0 ;i < size;i++){
+            System.out.print(items[i + curFirst] + " ");
         }
         System.out.println();
     }
     public T removeFirst(){
-        T removed = items[0];
-        T[] temp = (T[]) new Object[size];
-        System.arraycopy(items,1,temp,0,size);
-        items = temp;
-        size --;
-        if(size <= 0.25* items.length){
-            resizeDown((int)0.75* items.length);
+        if (isEmpty()) {
+            return null;
         }
+        if ((double) size / items.length < 0.25 && items.length > initSize){
+            resizeDown();
+        }
+
+        nextFirst = (nextFirst + 1) % items.length;
+        T removed = items[nextFirst];
+        items[nextFirst] = null;
+        size--;
         return removed;
     }
     public T removeLast(){
-        T removed = items[size];
-        items[size] = null;
-        size --;
-        if(size <= 0.25* items.length){
-            resizeDown((int)0.75* items.length);
+        if (isEmpty()) {
+            return null;
         }
+        if ((double) size / items.length < 0.25 && items.length > initSize){
+            resizeDown();
+        }
+
+        nextLast = ((nextLast - 1) + items.length) % items.length;
+        T removed = items[nextLast];
+        items[nextLast] = null;
+        size--;
         return removed;
     }
     public T get(int index){
-        return items[index];
+        if (index < 0 || index >= size) {
+            return null;
+        }
+        int trueIndex;
+        trueIndex = (nextFirst + 1 + index) % items.length;
+        return items[trueIndex];
     }
-    public void resizeDown(int capacity){
-        T[] temp = (T[]) new Object[capacity];
-        System.arraycopy(items,0,temp,0,size);
-        items = temp;
+    private void resizeDown(){
+        resize(size * 2 < initSize ? initSize : size * 2);
     }
 }
+
