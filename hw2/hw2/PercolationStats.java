@@ -36,9 +36,5 @@ public class PercolationStats {
         double stddev = stddev();
         return mean + (1.96 * stddev) / Math.sqrt(data.length);
     }
-    public static void main(String[] args) {
-        PercolationStats ps = new PercolationStats(30, 100, new PercolationFactory());
-        System.out.println("Low bound: " + ps.confidenceLow());
-        System.out.println("High bound: " + ps.confidenceHigh());
-    }
+
 }

@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     private WeightedQuickUnionUF quTop;
     private WeightedQuickUnionUF quTopToBottom;
-    private int grid[];
+    private int[] grid;
     private int N;
     private int numOfOpen;
     private int[][] direction = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -22,7 +22,7 @@ public class Percolation {
             quTopToBottom.union(i, N * N);
             quTopToBottom.union(indexTo1D(N - 1, i), N * N + 1);
         }
-        grid = new int[N*N];
+        grid = new int[N * N];
         this.numOfOpen = 0;
 
     }
@@ -30,11 +30,11 @@ public class Percolation {
         if (!validate(row, col)) {
             throw new IndexOutOfBoundsException();
         }
-        if (isOpen(row,col)) {
+        if (isOpen(row, col)) {
             return;
         }
         for (int[] d : direction) {
-            if (validate(row + d[0], col + d[1])){
+            if (validate(row + d[0], col + d[1])) {
                 if (isOpen(row + d[0], col + d[1])) {
                     quTop.union(indexTo1D(row, col), indexTo1D(row + d[0], col + d[1]));
                     quTopToBottom.union(indexTo1D(row, col), indexTo1D(row + d[0], col + d[1]));
@@ -50,7 +50,7 @@ public class Percolation {
         if (!validate(row,  col)) {
             throw new IndexOutOfBoundsException();
         }
-        return grid[indexTo1D(row,col)] == 1;
+        return grid[indexTo1D(row, col)] == 1;
     }
 
     public boolean isFull(int row, int col) {
@@ -58,7 +58,7 @@ public class Percolation {
             throw new IndexOutOfBoundsException();
         }
         if (N == 1) {
-            return isOpen(0,0);
+            return isOpen(0, 0);
         }
         return isOpen(row, col) && quTop.connected(indexTo1D(row, col), N * N);
     }
@@ -67,7 +67,7 @@ public class Percolation {
     }
     public boolean percolates() {
         if (N == 1) {
-            return isOpen(0,0);
+            return isOpen(0, 0);
         }
         return quTopToBottom.connected(N * N + 1, N * N);
     }
