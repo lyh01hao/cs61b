@@ -27,7 +27,7 @@ public class Percolation {
 
     }
     public void open(int row, int col) {      // open the site (row, col) if it is not open already}
-        if (validate(row, col)) {
+        if (!validate(row, col)) {
             throw new IndexOutOfBoundsException();
         }
         for (int[] d : direction) {
@@ -42,14 +42,14 @@ public class Percolation {
     }
 
     public boolean isOpen(int row, int col) { // is the site (row, col) open?
-        if (validate(row, col)) {
+        if (!validate(row, col)) {
             throw new IndexOutOfBoundsException();
         }
         return grid[indexTo1D(row,col)] == 1;
     }
 
     public boolean isFull(int row, int col) { // is the site (row, col) full?
-        if (validate(row, col)) {
+        if (!validate(row, col)) {
             throw new IndexOutOfBoundsException();
         }
         return isOpen(row, col) && quTop.connected(indexTo1D(row, col), N * N);
