@@ -3,7 +3,7 @@ import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 public class PercolationStats {
     private double[] data;
-    public PercolationStats(int N, int T, PercolationFactory pf) {  // perform T independent experiments on an N-by-N grid
+    public PercolationStats(int N, int T, PercolationFactory pf) {
         if (N <= 0 || T <= 0) {
             throw new IllegalArgumentException();
         }
@@ -22,20 +22,20 @@ public class PercolationStats {
 
     public double mean() {
         return StdStats.mean(data);
-    }                                          // sample mean of percolation threshold
+    }
     public double stddev() {
         return StdStats.stddev(data);
-    }                                        // sample standard deviation of percolation threshold
+    }
     public double confidenceLow() {
         double mean = mean();
         double stddev = stddev();
         return mean - (1.96 * stddev) / Math.sqrt(data.length);
-    }                               // low endpoint of 95% confidence interval
+    }
     public double confidenceHigh() {
         double mean = mean();
         double stddev = stddev();
         return mean + (1.96 * stddev) / Math.sqrt(data.length);
-    }                                // high endpoint of 95% confidence interval
+    }
     public static void main(String[] args) {
         PercolationStats ps = new PercolationStats(30, 100, new PercolationFactory());
         System.out.println("Low bound: " + ps.confidenceLow());

@@ -10,7 +10,7 @@ public class Percolation {
     private int numOfOpen;
     private int[][] direction = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-    public Percolation(int N) {               // create N-by-N grid, with all sites initially blocked
+    public Percolation(int N) {
         if (N <= 0) {
             throw new IllegalArgumentException();
         }
@@ -26,41 +26,52 @@ public class Percolation {
         this.numOfOpen = 0;
 
     }
-    public void open(int row, int col) {      // open the site (row, col) if it is not open already}
+    public void open(int row, int col) {
         if (!validate(row, col)) {
             throw new IndexOutOfBoundsException();
         }
+        if (isOpen(row,col)) {
+            return;
+        }
         for (int[] d : direction) {
-            if (validate(row + d[0], col + d[1]))
-            if (isOpen(row + d[0], col + d[1])) {
-                quTop.union(indexTo1D(row, col), indexTo1D(row + d[0], col + d[1]));
-                quTopToBottom.union(indexTo1D(row, col), indexTo1D(row + d[0], col + d[1]));
+            if (validate(row + d[0], col + d[1])){
+                if (isOpen(row + d[0], col + d[1])) {
+                    quTop.union(indexTo1D(row, col), indexTo1D(row + d[0], col + d[1]));
+                    quTopToBottom.union(indexTo1D(row, col), indexTo1D(row + d[0], col + d[1]));
+                }
             }
+
         }
         numOfOpen++;
         grid[indexTo1D(row, col)] = 1;
     }
 
-    public boolean isOpen(int row, int col) { // is the site (row, col) open?
-        if (!validate(row, col)) {
+    public boolean isOpen(int row, int col) {
+        if (!validate(row,  col)) {
             throw new IndexOutOfBoundsException();
         }
         return grid[indexTo1D(row,col)] == 1;
     }
 
-    public boolean isFull(int row, int col) { // is the site (row, col) full?
+    public boolean isFull(int row, int col) {
         if (!validate(row, col)) {
             throw new IndexOutOfBoundsException();
         }
+        if (N == 1) {
+            return isOpen(0,0);
+        }
         return isOpen(row, col) && quTop.connected(indexTo1D(row, col), N * N);
     }
-    public int numberOfOpenSites() {          // number of open sites
+    public int numberOfOpenSites() {
         return numOfOpen;
     }
-    public boolean percolates() {          // does the system percolate?
+    public boolean percolates() {
+        if (N == 1) {
+            return isOpen(0,0);
+        }
         return quTopToBottom.connected(N * N + 1, N * N);
     }
-    public static void main(String[] args) {  // use for unit testing (not required)
+    public static void main(String[] args) {
         new Percolation(5);
     }
     private int indexTo1D(int row, int col) {
