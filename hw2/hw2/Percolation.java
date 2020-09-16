@@ -10,7 +10,7 @@ public class Percolation {
     private int numOfOpen;
     private int[][] direction = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-    Percolation(int N) {               // create N-by-N grid, with all sites initially blocked
+    public Percolation(int N) {               // create N-by-N grid, with all sites initially blocked
         if (N <= 0) {
             throw new IllegalArgumentException();
         }
