@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 
-import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
@@ -32,8 +31,8 @@ public class TestSimpleOomage {
         SimpleOomage oo1 = new SimpleOomage(5, 10, 20);
         SimpleOomage oo2 = new SimpleOomage(5, 10, 20);
         SimpleOomage oo3 = new SimpleOomage(50, 50, 50);
-        SimpleOomage oo4 = new SimpleOomage(5,20,10);
-        SimpleOomage oo5 = new SimpleOomage(20,5,10);
+        SimpleOomage oo4 = new SimpleOomage(5, 20, 10);
+        SimpleOomage oo5 = new SimpleOomage(20, 5, 10);
         assertEquals(oo1.hashCode(), oo2.hashCode());
         assertNotEquals(oo3.hashCode(), oo2.hashCode());
         assertNotEquals(oo4.hashCode(), oo2.hashCode());
@@ -61,7 +60,7 @@ public class TestSimpleOomage {
         assertTrue(hashSet.contains(ooA2));
     }
 
-    /* TODO: Uncomment this test after you finish haveNiceHashCode Spread in OomageTestUtility */
+
     @Test
     public void testRandomOomagesHashCodeSpread() {
         List<Oomage> oomages = new ArrayList<>();
