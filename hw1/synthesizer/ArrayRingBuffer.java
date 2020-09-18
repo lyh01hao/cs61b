@@ -72,10 +72,10 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new valueIterator<>();
+        return new ValueIterator<>();
     }
 
-    private class valueIterator<T> implements Iterator<T>  {
+    private class ValueIterator<T> implements Iterator<T>  {
 
         private int iFirst = first;
 
