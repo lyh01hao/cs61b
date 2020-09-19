@@ -27,24 +27,24 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      * Returns the index of the node to the left of the node at i.
      */
     private static int leftIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        /* to-do: Your code here! */
+        return 2 * i;
     }
 
     /**
      * Returns the index of the node to the right of the node at i.
      */
     private static int rightIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        /* to-do: Your code here! */
+        return 2 * i + 1;
     }
 
     /**
      * Returns the index of the node that is the parent of the node at i.
      */
     private static int parentIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        /* to-do: Your code here! */
+        return i / 2;
     }
 
     /**
@@ -107,7 +107,12 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-        /** TODO: Your code here. */
+        /** to-do: Your code here. */
+        int parent = index / 2;
+        if (parent > 0 && contents[parent].myPriority >= contents[index].myPriority) {
+            swap(parent, index);
+            swim(parent);
+        }
         return;
     }
 
@@ -118,7 +123,32 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-        /** TODO: Your code here. */
+        /** to-do: Your code here. */
+        int left = index * 2;
+        int right = index * 2 + 1;
+        if (left > size) {
+            return;
+        }
+        if (contents[left] == null) {
+            return;
+        }
+        if (contents[right] != null && right <= size) {
+            if (contents[index].myPriority > contents[left].myPriority || contents[index].myPriority > contents[right].myPriority) {
+                if (contents[left].myPriority > contents[right].myPriority) {
+                    swap(index, right);
+                    sink(right);
+                } else {
+                    swap(index, left);
+                    sink(left);
+                }
+            }
+        }
+        if (contents[right] == null && right <= size) {
+            if (contents[index].myPriority > contents[left].myPriority) {
+                swap(left, index);
+                return;
+            }
+        }
         return;
     }
 
@@ -133,7 +163,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             resize(contents.length * 2);
         }
 
-        /* TODO: Your code here! */
+        /* to-do: Your code here! */
+        Node n = new Node(item, priority);
+        size++;
+        contents[size] = n;
+        swim(size);
     }
 
     /**
@@ -142,8 +176,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T peek() {
-        /* TODO: Your code here! */
-        return null;
+        /* to-do: Your code here! */
+        T result = contents[1].myItem;
+        return result;
     }
 
     /**
@@ -157,8 +192,13 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T removeMin() {
-        /* TODO: Your code here! */
-        return null;
+        /* to-do: Your code here! */
+        T min = peek();
+        swap(1, size);
+        contents[size] = null;
+        size--;
+        sink(1);
+        return min;
     }
 
     /**
@@ -180,7 +220,16 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public void changePriority(T item, double priority) {
-        /* TODO: Your code here! */
+        /* to-do: Your code here! */
+        int i = 0;
+        for (Node n : contents) {
+            i++;
+            if (n.myItem.equals(item)) {
+                n.myPriority = priority;
+                swim(i);
+                sink(i);
+            }
+        }
         return;
     }
 
@@ -238,7 +287,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             myPriority = priority;
         }
 
-        public T item(){
+        public T item() {
             return myItem;
         }
 
