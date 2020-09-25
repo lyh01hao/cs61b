@@ -26,6 +26,9 @@ public class Board implements WorldState {
         int count = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
+                if (tileAt(i, j) == 0) {
+                    continue;
+                }
                 if (tileAt(i, j) != (i) * N + j + 1) {
                     count++;
                 }
@@ -76,10 +79,10 @@ public class Board implements WorldState {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        int N = size();
-        s.append(N + "\n");
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        int NN = size();
+        s.append(NN + "\n");
+        for (int i = 0; i < NN; i++) {
+            for (int j = 0; j < NN; j++) {
                 s.append(String.format("%2d ", tileAt(i, j)));
             }
             s.append("\n");
