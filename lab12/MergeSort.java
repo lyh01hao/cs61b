@@ -35,7 +35,13 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
         // Your code here!
-        return null;
+        Queue<Queue<Item>> compositeQueue = new Queue<>();
+        for (Item i : items) {
+            Queue<Item> forOneItem = new Queue<>();
+            forOneItem.enqueue(i);
+            compositeQueue.enqueue(forOneItem);
+        }
+        return compositeQueue;
     }
 
     /**
@@ -54,13 +60,49 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
         // Your code here!
-        return null;
+        Queue<Item> mergedQueue = new Queue<>();
+        while (!q1.isEmpty() || !q2.isEmpty()) {
+            mergedQueue.enqueue(getMin(q1, q2));
+        }
+        return mergedQueue;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
+    /** 并无其他作用，只是用来简化新建一个队列的操作，需要复制一个新的队列，这样做方便一点 **/
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
-        return items;
+        if (items.size() <= 1) {
+            return items;
+        }
+        Queue<Queue<Item>> queues = makeSingleItemQueues(items);
+        Queue<Item> leftQueue = new Queue<>();
+        Queue<Item> rightQueue = new Queue<>();
+        int left = items.size() / 2;
+        for (int i = 0; i < left; i++) {
+            leftQueue.enqueue(queues.dequeue().dequeue());
+        }
+        int right = items.size();
+        for (int i = left; i < right; i++) {
+            rightQueue.enqueue(queues.dequeue().dequeue());
+        }
+        Queue q1 = mergeSort(leftQueue);
+        Queue q2 = mergeSort(rightQueue);
+
+        return mergeSortedQueues(q1, q2);
+    }
+
+    public static void main(String[] args) {
+        Queue<Integer> studentID = new Queue<>();
+        studentID.enqueue(5);
+        studentID.enqueue(78);
+        studentID.enqueue(71);
+        studentID.enqueue(1);
+        studentID.enqueue(114514);
+        System.out.println(studentID);
+        Queue sortedID =  MergeSort.mergeSort(studentID);
+        System.out.println("original: " + studentID);
+        System.out.println("sorted:   " + sortedID);
+
     }
 }
