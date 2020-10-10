@@ -14,7 +14,7 @@ public class SeamCarver {
         this.width = picture.width();
     }
     public Picture picture() {                      // current picture
-        return this.picture;
+        return new Picture(this.picture);
     }
     public     int width() {                       // width of current picture
         return width;
@@ -30,11 +30,11 @@ public class SeamCarver {
         Color leftPixel = picture.get(left, row);
         Color rightPixel = picture.get(right, row);
 
-        double Rx = leftPixel.getRed() - rightPixel.getRed();
-        double Gx = leftPixel.getGreen() - rightPixel.getGreen();
-        double Bx = leftPixel.getBlue() - rightPixel.getBlue();
+        double rx = leftPixel.getRed() - rightPixel.getRed();
+        double gx = leftPixel.getGreen() - rightPixel.getGreen();
+        double bx = leftPixel.getBlue() - rightPixel.getBlue();
 
-        return (Rx * Rx) + (Gx * Gx) + (Bx * Bx);
+        return (rx * rx) + (gx * gx) + (bx * bx);
     }
 
     private double calculateEnergyOfY(int col, int row) {
@@ -44,11 +44,11 @@ public class SeamCarver {
         Color upPixel = picture.get(col, up);
         Color downPixel = picture.get(col, down);
 
-        double Ry = upPixel.getRed() - downPixel.getRed();
-        double Gy = upPixel.getGreen() - downPixel.getGreen();
-        double By = upPixel.getBlue() - downPixel.getBlue();
+        double ry = upPixel.getRed() - downPixel.getRed();
+        double gy = upPixel.getGreen() - downPixel.getGreen();
+        double by = upPixel.getBlue() - downPixel.getBlue();
 
-        return (Ry * Ry) + (Gy * Gy) + (By * By);
+        return (ry * ry) + (gy * gy) + (by * by);
     }
 
     public  double energy(int x, int y) {           // energy of pixel at column x and row y
@@ -200,8 +200,33 @@ public class SeamCarver {
 
         return seam;
     }
-    public    void removeHorizontalSeam(int[] seam) {  // remove horizontal seam from picture
+    // remove horizontal seam from picture
+    public void removeHorizontalSeam(int[] seam) {
+        if (checkSeam(seam)) {
+            this.picture = new Picture(SeamRemover.removeHorizontalSeam(this.picture, seam));
+            height--;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
-    public    void removeVerticalSeam(int[] seam) {    // remove vertical seam from picture
+
+    // remove vertical seam from picture
+    public void removeVerticalSeam(int[] seam) {
+        if (checkSeam(seam)) {
+            this.picture = new Picture(SeamRemover.removeVerticalSeam(this.picture, seam));
+            width--;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private boolean checkSeam(int[] seam) {
+        for (int i = 0; i < seam.length - 1; i++) {
+            if (Math.abs(seam[i] - seam[i + 1]) > 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
